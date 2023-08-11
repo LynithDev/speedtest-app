@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+  <requires lib="gtk" version="4.10"/>
+  <requires lib="libadwaita" version="1.3"/>
+  <template class="SpeedtestWindow" parent="AdwApplicationWindow">
+    <property name="default-height">10</property>
+    <property name="default-width">10</property>
+    <property name="height-request">300</property>
+    <property name="width-request">400</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar">
+            <property name="css-classes">flat</property>
+            <property name="title-widget">
+              <object class="AdwWindowTitle"/>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">12</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="margin-bottom">24</property>
+                <property name="margin-end">24</property>
+                <property name="margin-start">24</property>
+                <property name="margin-top">24</property>
+                <property name="vexpand">True</property>
+                <child>
+                    <object class="CircleProgressBar" id="circle_progress_bar">
+                        <property name="height-request">160</property>
+                        <property name="hexpand">True</property>
+                        <property name="text-large">0</property>
+                        <property name="text-small">Mbps</property>
+                        <property name="percentage">0.0</property>
+                    </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="margin-end">12</property>
+                <property name="margin-start">12</property>
+                <property name="margin-top">12</property>
+                <property name="halign">center</property>
+                <property name="hexpand">True</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <property name="valign">center</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkButton" id="start_test_button">
+                    <property name="css-classes">pill</property>
+                    <property name="label">Start Test</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="AdwClamp">
+                    <property name="maximum-size">500</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin-end">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-top">12</property>
+                        <property name="css-classes">card</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="hexpand">True</property>
+                            <property name="margin-bottom">24</property>
+                            <property name="margin-end">24</property>
+                            <property name="margin-start">24</property>
+                            <property name="margin-top">24</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="css-classes">heading</property>
+                                <property name="justify">center</property>
+                                <property name="label">Download (Mbps)</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="download_speed_label">
+                                <property name="css-classes">title-1</property>
+                                <property name="justify">center</property>
+                                <property name="label">0.00</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="hexpand">True</property>
+                            <property name="margin-bottom">24</property>
+                            <property name="margin-end">24</property>
+                            <property name="margin-start">24</property>
+                            <property name="margin-top">24</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="css-classes">heading</property>
+                                <property name="justify">center</property>
+                                <property name="label">Upload (Mbps)</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="upload_speed_label">
+                                <property name="css-classes">title-1</property>
+                                <property name="justify">center</property>
+                                <property name="label">0.00</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkRevealer" id="info_rows_revealer">
+                    <property name="transition-type">slide-up</property>
+                    <property name="overflow">visible</property>
+                    <property name="margin-top">12</property>
+                    <child>
+                      <object class="AdwClamp">
+                        <property name="margin-bottom">12</property>
+                        <property name="maximum-size">500</property>
+                        <child>
+                          <object class="GtkScrolledWindow">
+                            <property name="min-content-height">164</property>
+                            <child>
+                              <object class="GtkListBox" id="info_rows">
+                                <property name="margin-end">12</property>
+                                <property name="margin-start">12</property>
+                                <property name="css-classes">boxed-list</property>
+                                <property name="selection-mode">none</property>
+                                <child>
+                                  <object class="AdwActionRow" id="isp_row">
+                                    <property name="subtitle">Orange Polska S.A.</property>
+                                    <property name="subtitle-selectable">True</property>
+                                    <property name="title">Internet Service Provider</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="AdwActionRow" id="server_row">
+                                    <property name="subtitle">Orange Polska S.A.</property>
+                                    <property name="subtitle-selectable">True</property>
+                                    <property name="title">Server</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="AdwExpanderRow" id="expander_row">
+                                    <property name="title">Extra info</property>
+                                    <property name="subtitle">More sensitive information</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
