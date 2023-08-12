@@ -5,10 +5,10 @@ pub(crate) mod imp {
 
     use gio::glib::{MainContext, Priority, ControlFlow};
     use glib::subclass::InitializingObject;
-    use adw::{subclass::prelude::*, glib, prelude::*, ActionRow, PasswordEntryRow, MessageDialog};
+    use adw::{subclass::prelude::*, glib, prelude::*, ActionRow, PasswordEntryRow};
     use gtk::{CompositeTemplate, Button, traits::ButtonExt};
 
-    use crate::{provider::{self, TestInfo, TestDownloadInfo, Provider, TestUploadInfo, TestResultInfo}, progress_bar::CircleProgressBar, providers::speedtest_net::{SpeedtestNetProvider, speedtest_cli_installed}};
+    use crate::{provider::{self, TestInfo, TestDownloadInfo, Provider, TestUploadInfo, TestResultInfo}, progress_bar::CircleProgressBar, providers::speedtest_net::SpeedtestNetProvider};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/dev/lynith/speedtest/window.ui")]
@@ -38,7 +38,10 @@ pub(crate) mod imp {
         pub info_rows_revealer: TemplateChild<gtk::Revealer>,
 
         #[template_child]
-        pub expander_row: TemplateChild<adw::ExpanderRow>
+        pub expander_row: TemplateChild<adw::ExpanderRow>,
+
+        #[template_child]
+        pub status_label: TemplateChild<gtk::Label>
     }
 
     #[glib::object_subclass]
@@ -74,8 +77,10 @@ pub(crate) mod imp {
 
             let mut provider = SpeedtestNetProvider::new();
 
+            let status_label = self.status_label.to_owned();
             self.start_test_button.connect_clicked(move |_| {
                 let sender = sender.clone();
+                status_label.set_text("Connecting...");
 
                 tokio::spawn(async move {
                     provider::start_speedtest(
@@ -97,6 +102,7 @@ pub(crate) mod imp {
             });
 
             fn reset(window: &Window, row: &ActionRow) {
+                window.status_label.set_text("");
                 window.info_rows_revealer.set_reveal_child(false);
                 window.start_test_button.set_sensitive(true);
 
@@ -121,6 +127,7 @@ pub(crate) mod imp {
                     if msg.0.is_some() {
                         reset(&window, &row);
                         window.start_test_button.set_sensitive(false);
+                        window.status_label.set_text("Gathering info");
 
                         let info = msg.0.unwrap();
                         window.isp_row.set_subtitle(&info.isp);
@@ -147,6 +154,7 @@ pub(crate) mod imp {
                     }
 
                     if msg.1.is_some() {
+                        window.status_label.set_text("Running download test");
                         let download = msg.1.unwrap();
                         let mbps = download.bandwidth as f32 / 125_000.0;
 
@@ -159,6 +167,7 @@ pub(crate) mod imp {
                     }
 
                     if msg.2.is_some() {
+                        window.status_label.set_text("Running upload test");
                         let upload = msg.2.unwrap();
                         let mbps = upload.bandwidth as f32 / 125_000.0;
 
@@ -171,6 +180,7 @@ pub(crate) mod imp {
                     }
 
                     if msg.3.is_some() {
+                        window.status_label.set_text("Finished test");
                         println!("Finished test");
                         window.start_test_button.set_sensitive(true);
                         let result = msg.3.unwrap();

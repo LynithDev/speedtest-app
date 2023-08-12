@@ -30,6 +30,8 @@
                 <property name="margin-start">24</property>
                 <property name="margin-top">24</property>
                 <property name="vexpand">True</property>
+                <property name="orientation">vertical</property>
+                <property name="valign">end</property>
                 <child>
                     <object class="CircleProgressBar" id="circle_progress_bar">
                         <property name="height-request">160</property>
@@ -37,6 +39,16 @@
                         <property name="text-large">0</property>
                         <property name="text-small">Mbps</property>
                         <property name="percentage">0.0</property>
+                    </object>
+                </child>
+                <child>
+                    <object class="GtkLabel" id="status_label">
+                        <property name="css-classes">title-4</property>
+                        <property name="halign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="label"></property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-top">12</property>
                     </object>
                 </child>
               </object>
@@ -50,7 +62,7 @@
                 <property name="hexpand">True</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
-                <property name="valign">center</property>
+                <property name="valign">end</property>
                 <property name="vexpand">True</property>
                 <child>
                   <object class="GtkButton" id="start_test_button">
