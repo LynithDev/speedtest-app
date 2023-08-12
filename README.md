@@ -1,11 +1,11 @@
-<center>
+<div align="center">
 
 ![speedtest logo](./.github/logo.svg "Speedtest Logo")
 
 # Speedtest
 ### An app made to test your internet speed
 
-</center>
+</div>
 
 ## Screenshots
 
