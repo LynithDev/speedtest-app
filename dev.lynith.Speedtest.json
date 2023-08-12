@@ -45,6 +45,10 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/LynithDev/speedtest-app"
+                },
+                {
+                	"type": "archive",
+                	"url": "https://github.com/LynithDev/speedtest-app/releases/download/1.0.0/dev.lynith.Speedtest.zip"
                 }
             ]
         }
