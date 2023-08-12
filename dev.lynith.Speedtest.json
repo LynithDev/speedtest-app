@@ -44,7 +44,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///home/lynith/Documents/Projects/Rust/Speedtest"
+                    "url" : "https://github.com/LynithDev/speedtest-app"
                 }
             ]
         }
