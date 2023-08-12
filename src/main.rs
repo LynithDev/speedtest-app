@@ -26,7 +26,7 @@ async fn main() -> glib::ExitCode {
 
 fn build_ui(app: &Application) {
     let window = Window::new(app);
-    
+    window.set_icon_name(Some("dev.lynith.Speedtest"));
     window.present();
 
     if !speedtest_cli_installed() {
