@@ -13,17 +13,10 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--filesystem=~/.local/share/"
+        "--persist=~/.local/share/speedtest/"
     ],
     "build-options" : {
-        "append-path" : "/usr/lib/sdk/rust-stable/bin",
-        "build-args" : [
-            "--share=network"
-        ],
-        "env" : {
-            "RUST_BACKTRACE" : "1",
-            "RUST_LOG" : "speedtest=debug"
-        }
+        "append-path" : "/usr/lib/sdk/rust-stable/bin"
     },
     "cleanup" : [
         "/include",
@@ -41,16 +34,20 @@
             "name" : "speedtest",
             "builddir" : true,
             "buildsystem" : "meson",
+            "build-options": {
+                "env": {
+                    "CARGO_HOME": "/run/build/speedtest/cargo"
+                }
+            },
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://github.com/LynithDev/speedtest-app"
+                    "url" : "https://github.com/LynithDev/speedtest-app",
+                    "tag": "1.0.0"
                 },
-                {
-                	"type": "archive",
-                	"url": "https://github.com/LynithDev/speedtest-app/releases/download/1.0.0/dev.lynith.Speedtest.zip"
-                }
+                "cargo-sources.json"
             ]
         }
     ]
 }
+
